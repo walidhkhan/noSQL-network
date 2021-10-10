@@ -22,7 +22,13 @@ const UserSchema = new Schema(
             },
             required: [true, 'Email is required']
         },
-
+        thoughts: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'Thought'
+            }
+        ],
+        friends: [],
     }
 )
 
