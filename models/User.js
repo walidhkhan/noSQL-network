@@ -6,7 +6,7 @@ const UserSchema = new Schema(
         username: {
             type: String,
             unique: true,
-            required: 'Username is required',
+            required: true,
             trim: true
         },
         email: {
@@ -18,7 +18,7 @@ const UserSchema = new Schema(
                 validator: function (v) {
                     return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v);
                 },
-                message: 'Please entere a valid email address'
+                message: 'Please enter a valid email address'
             },
             required: [true, 'Email is required']
         },
