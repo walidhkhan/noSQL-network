@@ -13,13 +13,7 @@ const UserSchema = new Schema(
             type: String,
             
             unique: true,
-            validate: {
-                // validating with regex in order to keep validations consistent and avoid using hanging function
-                validator: function (v) {
-                    return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v);
-                },
-                message: 'Please enter a valid email address'
-            },
+            match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please enter a valid email address'],
             required: [true, 'Email is required']
         },
         thoughts: [
@@ -28,9 +22,18 @@ const UserSchema = new Schema(
                 ref: 'Thought'
             }
         ],
-        friends: [],
+        friends: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'User'
+            }
+        ],
     }
 )
+
+UserSchema.virtual('friendCount').get(function(){
+    return this.friends.length
+})
 
 const User = model('User', UserSchema);
 
