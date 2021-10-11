@@ -1,4 +1,4 @@
-const { Thought } = require('../models');
+const { User, Thought, Reaction } = require('../models');
 
 const thoughtController = {
     // get all thoughts
@@ -50,14 +50,40 @@ const thoughtController = {
     },
 
     // delete thought
-    deleteThought(req,res) {
-        Thought.findOneAndDelete({_id: req.params.id})
-        .then(dbUserData => res.json(dbUserData))
-        .catch(err => {
-            console.log(err);
-            res.status(500).json(err);
-        });
-    }
+    deleteThought(req, res) {
+        Thought.findOneAndDelete({ _id: req.params.id })
+            .then(dbThoughtData => res.json(dbThoughtData))
+            .catch(err => {
+                console.log(err);
+                res.status(500).json(err);
+            });
+    },
+
+    // add reaction
+    addReaction({ params, body }, res) {
+        Thought.findOneAndUpdate(
+            { _id: params.thoughtId },
+            { $addToSet: { reactions: body } },
+            { new: true, runValidators: true })
+            .then(dbThoughtData => res.json(dbThoughtData))
+            .catch(err => {
+                console.log(err);
+                res.status(500).json(err);
+            });
+    },
+
+    // delete reaction
+    deleteRaction({ params, body}, res) {
+        Thought.findOneAndUpdate(
+            { _id: params.thoughtId },
+            { $pull: { reactions: { reactionId: body.reactionId }}},
+            { new: true, runValidators: true })
+            .then(dbThoughtData => res.json(dbThoughtData))
+            .catch(err => {
+                console.log(err);
+                res.status(500).json(err);
+            });
+    },
 };
 
 module.exports = thoughtController;
