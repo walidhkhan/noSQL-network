@@ -6,8 +6,6 @@
 - [Installation](#Installation)
 - [Usage](#Usage)
 - [License](#License)
-- [Contributing](#Contributing)
-- [Tests](#Tests)
 - [Questions](#Questions)
 
 <div id='Desciption'/>
@@ -31,16 +29,6 @@ Please watch this video for usage information: https://youtu.be/k0Y_CF5crvk
 ## License       
 ISC  
 ![license](https://img.shields.io/badge/license-ISC-green.svg)
-
-<div id='Contributing'/>
-
-## Contributing
- 
-
-<div id='Tests'/>
-
-## Tests
-
 
 <div id='Questions'/>
 
